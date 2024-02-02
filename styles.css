@@ -1,8 +1,8 @@
 .tab {
     overflow: hidden;
     border-bottom: 1px solid #ccc;
-    
     display: flex;
+    justify-content: center;
     gap: 20px;
     
   }
@@ -10,7 +10,6 @@
   
   .tab button {
     background-color: inherit;
-    
     border: none;
     outline: none;
     cursor: pointer;
@@ -45,12 +44,12 @@
   
 
   .tab button:hover {
-    background-color: #ededed;
+    background-color: #fbfbfb;
   }
   
  
   .tab button.active {
-    background-color: #ededed;
+    background-color: #fbfbfb;
     color: orangered;
 
   }
