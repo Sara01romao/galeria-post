@@ -1,4 +1,4 @@
-.tab {
+/* .tab {
     overflow: hidden;
     border-bottom: 1px solid #ccc;
     display: flex;
@@ -60,22 +60,45 @@
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
-  }
+  } */
 
 
 
   .swiper {
     width: 600px;
     height: 40px;
+    border: 1px solid red;
+    padding: 20px;
+    position: relative;
+    
+  }
+
+  .swiper-wrapper{
+    align-items: center !important;
+    padding: 0px 40px;
+    
+  }
+
+  button.swiper-slide{
+    background: #f5f5f5;
+    border-radius: 10px;
+    width: 95px !important;
+    height: 30px !important;
+    cursor: pointer;
+    border:none;
+
+  }
+
+  button.swiper-slide:hover{
+    background: rgb(209, 209, 209);
   }
 
 
-  .swiper-slide{
-    width: 143px;
-    margin-right: 30px;
-    height: 30px;
-    border: none;
-    border-radius: 50px;
-    border: 2px solid black;
-
+  .swiper-button-next:after, .swiper-button-prev:after {
+    background: #25222245;
+    padding: 10px 14px;
+    border-radius: 360px;
+    color: black;
+    font-size: 16px !important;
+    font-weight: bold;
   }
