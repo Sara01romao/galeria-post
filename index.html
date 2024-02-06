@@ -41,9 +41,18 @@
 </div>
 
 
+<section class="galeria">
+
+   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfC92PYib7iFZSZPeFc7M2Gugp_veRnFAj-2roXimZkw&s" alt="">
+   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfC92PYib7iFZSZPeFc7M2Gugp_veRnFAj-2roXimZkw&s" alt="">
+
+</section>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
+
   const swiper = new Swiper('.swiper', {
   // Optional parameters
   slidesPerView: 5,
@@ -91,58 +100,32 @@ $('#btn-todos').click(function(){
 
     console.log("todos")
 })
-</script>
 
 
+$('.galeria img').on('click', function() {
+        // Obtém o URL da imagem
+        var imageUrl = this.src;
 
+        // Realiza o download da imagem
+        fetch(imageUrl)
+            .then(response => response.blob())
+            .then(blob => {
+                // Cria um link de download dinâmico usando jQuery
+                var link = $('<a>', {
+                    href: URL.createObjectURL(blob),
+                    download: 'imagem' // Nome do arquivo a ser salvo (pode personalizar conforme necessário)
+                });
 
+                // Adiciona o link ao corpo do documento e simula o clique nele para iniciar o download
+                $('body').append(link);
+                link[0].click();
 
+                // Remove o link após o download
+                link.remove();
+            });
+    });
 
-    <!-- <h2>Tabs</h2>
-<p>Click on the buttons inside the tabbed menu:</p>
-
-<div class="tab">
-  <button class="tablinks active" onclick="openCity(event, 'Todos')">London</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
-</div>
-
-<div id="Todos" class="tabcontent">
-  <h3>Todos</h3>
-  <p>London is the capital city of England.</p>
-</div>
-
-<div id="Paris" class="tabcontent">
-  <h3>Paris</h3>
-  <p>Paris is the capital of France.</p> 
-</div>
-
-<div id="Tokyo" class="tabcontent">
-  <h3>Tokyo</h3>
-  <p>Tokyo is the capital of Japan.</p>
-</div>
-
-<script>
-
-tabcontent = document.getElementsByClassName("tabcontent");
-tabcontent[0].style.display = "block";
-
-function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-
-
-</script> -->
+</script> 
 
 </body>
 </html>
