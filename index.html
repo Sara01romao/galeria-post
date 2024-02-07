@@ -7,13 +7,10 @@
 
     <link rel="stylesheet" href="styles.css">
 
-    <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
+   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -78,32 +75,54 @@
 
 
 $('#btn-todos').click(function(){
-  
+ 
   var acaoFiltro = "todos";
 
-  $.ajax({
-      url: '',
-      type: 'post',
-      data: { exemplo: JSON.stringify(exemplo)},
+  // $.ajax({
+  //     url: '',
+  //     type: 'post',
+  //     data: { exemplo: JSON.stringify(exemplo)},
 
-      success: function (response) {
-        var exemplo= JSON.parse(response);
+  //     success: function (response) {
+  //       var exemplo= JSON.parse(response);
         
         
 
         
   
 
-      }
+  //     }
 
-  });
+  // });
 
     console.log("todos")
 })
 
 
 $('.galeria img').on('click', function() {
-        // Obtém o URL da imagem
+       var urlimg = $(this).attr('src');
+
+       console.log(urlimg)
+       $('#img').attr('src', urlimg )     
+
+        Swal.fire({
+        
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        icon: "success",
+        html: `
+          You can use <b>bold text</b>,
+          <a href="#">links</a>,
+          and other HTML tags
+
+          <img id="img" src="${urlimg}" alt="">
+        `,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          
+
+          // Obtém o URL da imagem
         var imageUrl = this.src;
 
         // Realiza o download da imagem
@@ -116,6 +135,8 @@ $('.galeria img').on('click', function() {
                     download: 'imagem' // Nome do arquivo a ser salvo (pode personalizar conforme necessário)
                 });
 
+                
+
                 // Adiciona o link ao corpo do documento e simula o clique nele para iniciar o download
                 $('body').append(link);
                 link[0].click();
@@ -123,7 +144,17 @@ $('.galeria img').on('click', function() {
                 // Remove o link após o download
                 link.remove();
             });
+
+        } else if (result.isDenied) {
+          Swal.fire("Changes are not saved", "", "info");
+        }
+      });
+  
+        
     });
+
+
+   
 
 </script> 
 
