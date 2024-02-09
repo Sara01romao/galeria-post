@@ -102,3 +102,10 @@
     font-size: 16px !important;
     font-weight: bold;
   }
+
+
+  .swal2-confirm{
+    background-color: #00b11f;
+    width: 246px;
+    border:none;
+  }
