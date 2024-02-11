@@ -1,111 +1,77 @@
-/* .tab {
-    overflow: hidden;
-    border-bottom: 1px solid #ccc;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    
-  }
-  
-  
-  .tab button {
-    background-color: inherit;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 10px 16px;
-    transition: 0.3s;
-    font-size: 17px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .tab button::after {
-    content:'';
-    width: 0%;
-    height: 4px;
-    background: orangered;
-    position: absolute;
-    bottom: 0px;
-
-  }
-  .tab button.active::after {
-    content:'';
-    width: 100%;
-    height: 4px;
-    background: orangered;
-    position: absolute;
-    bottom: 0px;
-    transition: width 0.3s;
-
-  }
-  
-
-  .tab button:hover {
-    background-color: #fbfbfb;
-  }
-  
- 
-  .tab button.active {
-    background-color: #fbfbfb;
-    color: orangered;
-
-  }
-  
- 
-  .tabcontent {
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
-  } */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 
+header{
+  height: 50px;
+  background-color: black;
+}
 
-  .swiper {
+
+.swiper {
     width: 600px;
     height: 40px;
     border: 1px solid red;
     padding: 20px;
     position: relative;
     
-  }
+}
 
-  .swiper-wrapper{
-    align-items: center !important;
-    padding: 0px 40px;
-    
-  }
+.swiper-wrapper{
+  align-items: center !important;
+  padding: 0px 40px;
+  max-width: max-content;
+  margin: 0 auto;
+  
+}
 
-  button.swiper-slide{
-    background: #f5f5f5;
-    border-radius: 10px;
-    width: 95px !important;
-    height: 30px !important;
-    cursor: pointer;
-    border:none;
+button.swiper-slide{
+  background: #f5f5f5;
+  border-radius: 10px;
+  width: 95px !important;
+  height: 30px !important;
+  cursor: pointer;
+  border:none;
 
-  }
+}
 
-  button.swiper-slide:hover{
-    background: rgb(209, 209, 209);
-  }
-
-
-  .swiper-button-next:after, .swiper-button-prev:after {
-    background: #25222245;
-    padding: 10px 14px;
-    border-radius: 360px;
-    color: black;
-    font-size: 16px !important;
-    font-weight: bold;
-  }
+button.swiper-slide:hover{
+  background: rgb(209, 209, 209);
+}
 
 
-  .swal2-confirm{
-    background-color: #00b11f;
-    width: 246px;
-    border:none;
-  }
+.swiper-button-next:after, .swiper-button-prev:after {
+  background: #25222245;
+  padding: 10px 14px;
+  border-radius: 360px;
+  color: black;
+  font-size: 16px !important;
+  font-weight: bold;
+}
+
+
+.swal2-confirm{
+  background-color: #00b11f;
+  width: 246px;
+  border:none;
+}
+
+
+.swiper-button-prev.swiper-button-disabled{
+  display: none !important; 
+}
+
+
+.swiper-button-next.swiper-button-disabled{
+  display: none !important; 
+}
+
+.galeria{
+  border: 1px solid red;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
