@@ -7,7 +7,10 @@
 
 header{
   height: 50px;
-  background-color: black;
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -17,6 +20,7 @@ header{
     border: 1px solid red;
     padding: 20px;
     position: relative;
+    margin-top: 30px;
     
 }
 
@@ -74,4 +78,14 @@ button.swiper-slide:hover{
   max-width: 1200px;
   margin: 0 auto;
   margin-top: 50px;
+
+  display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.galeria img{
+  max-width: 250px;
+
 }
