@@ -45,14 +45,15 @@
 
 <section class="galeria">
 
-   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfC92PYib7iFZSZPeFc7M2Gugp_veRnFAj-2roXimZkw&s" alt="">
-   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfC92PYib7iFZSZPeFc7M2Gugp_veRnFAj-2roXimZkw&s" alt="">
-
+   <img src="./imgs/dia-mae1.png" alt="Dia das Mães">
+   <img src="./imgs/dia-mae2.png" alt="Dia das Mães">
+   <img src="./imgs/dia-mae3.png" alt="Dia das Mães">
+   <img src="./imgs/dia-mae1.png" alt="Dia das Mães">
 </section>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<script src="script.js"></script>
 <script>
 
   const swiper = new Swiper('.swiper', {
@@ -80,83 +81,6 @@
 });
 
 
-$('#btn-todos').click(function(){
- 
-  var acaoFiltro = "todos";
-
-  // $.ajax({
-  //     url: '',
-  //     type: 'post',
-  //     data: { exemplo: JSON.stringify(exemplo)},
-
-  //     success: function (response) {
-  //       var exemplo= JSON.parse(response);
-        
-        
-
-        
-  
-
-  //     }
-
-  // });
-
-    console.log("todos")
-})
-
-
-$('.galeria img').on('click', function() {
-       var urlimg = $(this).attr('src');
-
-       console.log(urlimg)
-       $('#img').attr('src', urlimg )     
-
-        Swal.fire({
-        
-        
-        confirmButtonText: "Baixar",
-        showCloseButton: true,
-        html: `
-       
-
-
-          <img id="img" src="${urlimg}" alt="">
-        `,
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          
-
-          // Obtém o URL da imagem
-        var imageUrl = this.src;
-
-        // Realiza o download da imagem
-        fetch(imageUrl)
-            .then(response => response.blob())
-            .then(blob => {
-                // Cria um link de download dinâmico usando jQuery
-                var link = $('<a>', {
-                    href: URL.createObjectURL(blob),
-                    download: 'imagem' // Nome do arquivo a ser salvo (pode personalizar conforme necessário)
-                });
-
-                
-
-                // Adiciona o link ao corpo do documento e simula o clique nele para iniciar o download
-                $('body').append(link);
-                link[0].click();
-
-                // Remove o link após o download
-                link.remove();
-            });
-
-        } else if (result.isDenied) {
-          Swal.fire("Changes are not saved", "", "info");
-        }
-      });
-  
-        
-    });
 
 
    
