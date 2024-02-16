@@ -28,7 +28,7 @@ $('#btn-todos').click(function(){
     var urlimg = $(this).attr('src');
 
     console.log(urlimg)
-    $('#img').attr('src', urlimg )     
+    $('#img-modal').attr('src', urlimg )     
 
     Swal.fire({
     
@@ -39,7 +39,7 @@ $('#btn-todos').click(function(){
     
 
 
-    <img id="img" src="${urlimg}" alt="">
+    <img id="img-modal" src="${urlimg}" alt="">
     `,
 
     
