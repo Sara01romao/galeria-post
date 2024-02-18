@@ -6,21 +6,28 @@
 
 
 header{
-  height: 50px;
-  border: 1px solid red;
+  padding: 10px;
+  border: 1px solid rgb(223, 223, 223);
   display: flex;
   align-items: center;
   justify-content: center;
+  
 }
+
+/* .filtro{
+  max-width: 500px;
+  padding: 30px;
+  margin: 0 auto;
+} */
 
 
 .swiper {
-    width: 600px;
+    max-width: 500px;
     height: 40px;
-    border: 1px solid red;
     padding: 20px;
     position: relative;
-    margin-top: 30px;
+    margin-top: 10px;
+    
     
 }
 
@@ -43,7 +50,7 @@ button.swiper-slide{
 }
 
 button.swiper-slide:hover{
-  background: rgb(209, 209, 209);
+  background: #d4d0ff;
 }
 
 
@@ -73,16 +80,18 @@ button.swiper-slide:hover{
   display: none !important; 
 }
 
+
+
 .galeria{
-  border: 1px solid red;
+ 
   max-width: 1200px;
   margin: 0 auto;
   margin-top: 50px;
 
   display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .galeria img{
