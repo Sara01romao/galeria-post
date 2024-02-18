@@ -1,30 +1,48 @@
 
-$('#btn-todos').click(function(){
+let imgsObj = [
+    { id: 1, url: './imgs/dia-mae1.png', categoria: 'dia-das-maes', data: 'data_da_imagem_1' },
+    { id: 2, url: './imgs/dia-mae2.png', categoria: 'dia-das-maes', data: 'data_da_imagem_2' },
+    { id: 2, url: './imgs/pascoa1.png', categoria: 'pascoa', data: 'data_da_imagem_2' }
+  
+
+
+];
+
+
+
+$('.btn-filtro').click(function(){
+    var index = $(this).data('index');
+
+    console.log('index:', index)
  
-    var acaoFiltro = "todos";
-  
-    // $.ajax({
-    //     url: '',
-    //     type: 'post',
-    //     data: { exemplo: JSON.stringify(exemplo)},
-  
-    //     success: function (response) {
-    //       var exemplo= JSON.parse(response);
-          
-          
-  
-          
-    
-  
-    //     }
-  
-    // });
-  
-      console.log("todos")
+
+      let galeria = document.querySelector('.galeria');
+        galeria.innerHTML = ''; 
+        
+        imgsObj.forEach(function(objeto) {
+            if (index === 'todos') {
+                
+                let imagem = document.createElement('img');
+                imagem.src = objeto.url;
+               
+                galeria.appendChild(imagem);
+
+            } else if (objeto.categoria === index) {
+
+                let imagem = document.createElement('img');
+                imagem.src = objeto.url;
+               
+                galeria.appendChild(imagem);
+            }
+        });
+
+
   })
+
   
   
-  $('.galeria img').on('click', function() {
+  
+  $('.galeria').on('click', 'img', function() {
     var urlimg = $(this).attr('src');
 
     console.log(urlimg)
@@ -78,4 +96,16 @@ $('#btn-todos').click(function(){
 
         
     });
+  // $.ajax({
+    //     url: '',
+    //     type: 'post',
+    //     data: { exemplo: JSON.stringify(exemplo)},
+  
+    //     success: function (response) {
+    //       var exemplo= JSON.parse(response);
+          
+  
+    //     }
+  
+    // });
   
