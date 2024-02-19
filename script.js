@@ -13,6 +13,9 @@ let imgsObj = [
 $('.btn-filtro').click(function(){
     var index = $(this).data('index');
 
+    $('.btn-filtro').removeClass('active');
+    $(this).addClass('active');
+
     console.log('index:', index)
  
 
