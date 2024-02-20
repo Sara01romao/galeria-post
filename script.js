@@ -1,12 +1,27 @@
 
 let imgsObj = [
-    { id: 1, url: './imgs/dia-mae1.png', categoria: 'dia-das-maes', data: 'data_da_imagem_1' },
-    { id: 2, url: './imgs/dia-mae2.png', categoria: 'dia-das-maes', data: 'data_da_imagem_2' },
-    { id: 2, url: './imgs/pascoa1.png', categoria: 'pascoa', data: 'data_da_imagem_2' }
+    { id: 1, url: './imgs/dia-mae1.png', categoria: 'dia-das-maes' },
+    { id: 2, url: './imgs/dia-mae2.png', categoria: 'dia-das-maes' },
+    { id: 2, url: './imgs/pascoa1.png', categoria: 'pascoa' },
+    { id: 2, url: './imgs/festa-junina1.png', categoria: 'festa-junina' },
+    { id: 2, url: './imgs/festa-junina2.png', categoria: 'festa-junina' }
   
 
 
 ];
+
+let galeria = document.querySelector('.galeria');
+imgsObj.forEach(function(objeto) {
+   
+        
+        let imagem = document.createElement('img');
+        imagem.src = objeto.url;
+       
+        galeria.appendChild(imagem);
+
+    
+});
+
 
 
 
@@ -19,7 +34,7 @@ $('.btn-filtro').click(function(){
     console.log('index:', index)
  
 
-      let galeria = document.querySelector('.galeria');
+      
         galeria.innerHTML = ''; 
         
         imgsObj.forEach(function(objeto) {
@@ -65,7 +80,7 @@ $('.btn-filtro').click(function(){
 
     
     }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
+        
         if (result.isConfirmed) {
         
 
@@ -76,15 +91,15 @@ $('.btn-filtro').click(function(){
         fetch(imageUrl)
             .then(response => response.blob())
             .then(blob => {
-                // Cria um link de download dinâmico usando jQuery
+                
                 var link = $('<a>', {
                     href: URL.createObjectURL(blob),
-                    download: 'imagem' // Nome do arquivo a ser salvo (pode personalizar conforme necessário)
+                    download: 'imagem' 
                 });
 
                 
 
-                // Adiciona o link ao corpo do documento e simula o clique nele para iniciar o download
+               
                 $('body').append(link);
                 link[0].click();
 
@@ -99,6 +114,7 @@ $('.btn-filtro').click(function(){
 
         
     });
+
   // $.ajax({
     //     url: '',
     //     type: 'post',
