@@ -53,6 +53,19 @@ main{
   padding: 10px 10px 0px;
 }
 
+@media screen and (max-width:425px) {
+  .btn-filtro{
+    font-size: 16px;
+  }
+  
+}
+
+@media screen and (max-width:424px) {
+  .filtro{
+    flex-wrap: wrap;
+  }
+  
+}
 
 
 .btn-filtro:after{
@@ -116,13 +129,13 @@ main{
 
 .galeria img{
   max-width: 250px;
+  cursor: pointer;
 
 }
 
 .galeria img:hover{
   box-shadow: rgba(103, 77, 138, 0.25) 0px 14px 28px, rgba(74, 56, 99, 0.22) 0px 10px 10px;
 }
-
 
 
 
