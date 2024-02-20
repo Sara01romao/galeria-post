@@ -121,10 +121,13 @@ main{
   margin: 0 auto;
   margin-top: 50px;
 
-  display: flex;
+  display: grid;
   gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
+  grid-template-columns: repeat( auto-fill, minmax(250px, 1fr) );
+  
+  justify-items: center;
+  padding: 0px 15px;
+
 }
 
 .galeria img{
@@ -142,3 +145,22 @@ main{
 #img-modal{
   max-width: 400px;
 }
+
+.swal2-confirm{
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: bold;
+  background: #18C06F !important;
+  transition: 0.3 ease;
+  width: 150px;
+}
+
+.swal2-confirm:hover{
+  transition: 0.3 ease;
+  background: #0cb664 !important;
+
+}
+
+
