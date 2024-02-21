@@ -113,8 +113,6 @@ main{
 }
 
 
-
-
 .galeria{
  
   max-width: 1200px;
@@ -144,6 +142,7 @@ main{
 
 #img-modal{
   max-width: 400px;
+  width: 100%;
 }
 
 .swal2-confirm{
@@ -162,5 +161,7 @@ main{
   background: #0cb664 !important;
 
 }
+
+
 
 
