@@ -100,9 +100,58 @@ header{
 /**/
 
 .table-container{
-    border: 1px solid red;
     max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
     margin-top: 25px;
+    overflow-y: auto;
+    
+}
+
+.table-container table{
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 25px;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.table-container table th, .table-container td{
+    text-align: justify;
+    padding: 7px 20px;
+}
+
+
+.table-container td:nth-child(1){
+    width: 100px;
+    text-align: center;
+}
+
+.table-container td:nth-child(2){
+    width: 200px;
+}
+
+.table-container td{
+    padding: 10px;
+    border-top: 2px solid #d9d9d9;
+}
+
+
+.btn-excluir-img{
+    background: #E86969;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100px;
+    transition: 0.3s ease-out;
+}
+
+.btn-excluir-img:hover{
+    background: #c15050;
+    cursor: pointer;
+    transition: 0.3s ease-in;
+    
 }
