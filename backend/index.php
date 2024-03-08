@@ -7,7 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;1,700&display=swap" rel="stylesheet">
-        
+      
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
@@ -40,7 +42,7 @@
            </select>
        </div>
 
-       <button>
+       <button class="btn-novo">
             <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7 2V6.5M7 11V6.5M7 6.5H2M7 6.5H12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -98,13 +100,96 @@
    </div>
 
    
+    <div>
+
+      <form action="upload.php" method="post" enctype="multipart/form-data">
+        
+        <div class="campo-container">
+          <label for="">Categoria</label>
+
+          <select name="categoria" id="categoria">
+            <option value="">Selecionar</option>
+            <option value="">Dia das Mães</option>
+            <option value="">Páscoa</option>
+          </select>
+          
+
+        </div>
+         
+        <div class="campo-container">
+          <label for="arquivo">Selecione o arquivo para enviar:</label>
+          <input type="file" name="arquivo">
+          <input type="submit" value="Enviar Arquivo"> 
+        </div>
+
+        
+      </form>
+       
+    </div>
+
+    
 
 
-    <form action="upload.php" method="post" enctype="multipart/form-data">
-        Selecione o arquivo para enviar:
-        <input type="file" name="arquivo">
-        <input type="submit" value="Enviar Arquivo">
-    </form>
+    <script>
 
+      document.querySelector('.btn-novo').addEventListener("click", function (e){
+          
+        Swal.fire({
+          title: "Adicionar Novo",
+          html: `<div>
+
+                  <form class="add-form" action="upload.php" method="post" enctype="multipart/form-data">
+                    
+                    
+                    
+                    <div class="campo-container">
+                      <label for="categoria">Categoria</label>
+                      <select name="categoria" id="categoria">
+                        <option value="">Selecionar</option>
+                        <option value="">Dia das Mães</option>
+                        <option value="">Páscoa</option>
+                      </select>
+
+                    </div>
+                    
+                    <div class="campo-container campo-upload">
+                      <label for="arquivo">Selecione o arquivo para enviar:</label>
+                      <input type="file" name="arquivo">
+                      <input type="submit" value="Enviar Arquivo"> 
+                    </div>
+                  </form>
+                  
+                </div>`,
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Enviar",
+          showCloseButton: true,
+        
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              
+              title: "Enviado com sucesso",
+              position: "center",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1200
+        
+            });
+          }
+        });
+
+
+      })
+      
+    </script>
 </body>
 </html>
+
+
+position: "center",
+icon: "success",
+title: "Adicionado com sucesso",
+showConfirmButton: false,
+timer: 1500
