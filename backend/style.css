@@ -182,3 +182,36 @@ header{
 }
 
 
+.drop-imagem-container{
+    background-color: #f4f4f4;
+    border-radius: 4px;
+    height: 190px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+#drop-area {
+    border: 2px dashed #CECECE;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin: 50px auto;
+    width: 90%;
+  }
+  
+  .drop-text {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  #preview {
+    max-width: 100%;
+    max-height: 200px;
+    margin-top: 10px;
+    display: none;
+  }

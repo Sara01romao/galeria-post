@@ -127,7 +127,11 @@
        
     </div>
 
-    
+    <div id="drop-area">
+      <div class="drop-text">Arraste e solte uma imagem aqui ou clique para selecionar</div>
+      <input type="file" id="fileInput" accept="image/*" />
+      <img id="preview" src="#" alt="Preview" />
+    </div>
 
 
     <script>
@@ -136,7 +140,7 @@
           
         Swal.fire({
           title: "Adicionar Novo",
-          html: `<div>
+          html: `<div >
 
                   <form class="add-form" action="upload.php" method="post" enctype="multipart/form-data">
                     
@@ -152,11 +156,15 @@
 
                     </div>
                     
-                    <div class="campo-container campo-upload">
-                      <label for="arquivo">Selecione o arquivo para enviar:</label>
-                      <input type="file" name="arquivo">
-                      <input type="submit" value="Enviar Arquivo"> 
+                    <div class="drop-imagem-container">
+                      <div id="drop-area">
+                        <div class="drop-text">Arraste e solte uma imagem aqui ou clique para selecionar</div>
+                        <input type="file" id="fileInput" accept="image/*" />
+                        <img id="preview" src="#" alt="Preview" />
+                      </div>
                     </div>
+
+                    
                   </form>
                   
                 </div>`,
@@ -182,14 +190,51 @@
 
 
       })
+
+      const dropArea = document.getElementById('drop-area');
+      const fileInput = document.getElementById('fileInput');
+      const preview = document.getElementById('preview');
+
+        dropArea.addEventListener('dragover', (event) => {
+          event.preventDefault();
+          dropArea.classList.add('active');
+        });
+
+        dropArea.addEventListener('dragleave', () => {
+          dropArea.classList.remove('active');
+        });
+
+        dropArea.addEventListener('drop', (event) => {
+          event.preventDefault();
+          dropArea.classList.remove('active');
+          const file = event.dataTransfer.files[0];
+          handleFile(file);
+        });
+
+        fileInput.addEventListener('change', (event) => {
+          const file = event.target.files[0];
+          handleFile(file);
+        });
+
+        function handleFile(file) {
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+              preview.src = event.target.result;
+              preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+          }
+        }
+      
       
     </script>
 </body>
 </html>
 
 
-position: "center",
+<!-- position: "center",
 icon: "success",
 title: "Adicionado com sucesso",
 showConfirmButton: false,
-timer: 1500
+timer: 1500 -->
