@@ -100,141 +100,78 @@
    </div>
 
    
-    <div>
+   
+    
 
-      <form action="upload.php" method="post" enctype="multipart/form-data">
-        
-        <div class="campo-container">
-          <label for="">Categoria</label>
-
-          <select name="categoria" id="categoria">
-            <option value="">Selecionar</option>
-            <option value="">Dia das Mães</option>
-            <option value="">Páscoa</option>
-          </select>
-          
-
-        </div>
-         
-        <div class="campo-container">
-          <label for="arquivo">Selecione o arquivo para enviar:</label>
-          <input type="file" name="arquivo">
-          <input type="submit" value="Enviar Arquivo"> 
-        </div>
-
-        
-      </form>
-       
-    </div>
-
-    <div id="drop-area">
-      <div class="drop-text">Arraste e solte uma imagem aqui ou clique para selecionar</div>
-      <input type="file" id="fileInput" accept="image/*" />
-      <img id="preview" src="#" alt="Preview" />
-    </div>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script>
+    $(document).ready(function () {
 
-      document.querySelector('.btn-novo').addEventListener("click", function (e){
-          
+    $('.btn-novo').on('click', function(){
         Swal.fire({
-          title: "Adicionar Novo",
-          html: `<div >
+            title: "Adicionar Novo",
+            html: `<div>
+                        <form class="add-form" action="upload.php" method="post" enctype="multipart/form-data">
+                            <input class="texto" id="teste">
+                            <div class="campo-container">
+                                <label for="categoria">Categoria</label>
+                                <select name="categoria" id="categoria" required>
+                                    <option value="">Selecionar</option>
+                                    <option value="dia-das-maes">Dia das Mães</option>
+                                    <option value="pascoa">Páscoa</option>
+                                </select>
+                            </div>
+                            <div class="file-imagem-container" id="drop-area">
+                                <label for="arquivo-img">Enviar Imagem</label>
+                                <input type="file" id="fileInput" required >
+                            </div>
+                        </form>
+                    </div>`,
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Enviar",
+            showCloseButton: true,
+            preConfirm: () => {
+               
+                var categoria_img = $('#categoria').val();
+               
+                var arquivo_img = document.getElementById("fileInput").files[0];
 
-                  <form class="add-form" action="upload.php" method="post" enctype="multipart/form-data">
-                    
-                    
-                    
-                    <div class="campo-container">
-                      <label for="categoria">Categoria</label>
-                      <select name="categoria" id="categoria">
-                        <option value="">Selecionar</option>
-                        <option value="">Dia das Mães</option>
-                        <option value="">Páscoa</option>
-                      </select>
+               
 
-                    </div>
-                    
-                    <div class="drop-imagem-container">
-                      <div id="drop-area">
-                        <div class="drop-text">Arraste e solte uma imagem aqui ou clique para selecionar</div>
-                        <input type="file" id="fileInput" accept="image/*" />
-                        <img id="preview" src="#" alt="Preview" />
-                      </div>
-                    </div>
+                
+                // if (categoria_img === "" || arquivo_img === undefined) {
+                //     Swal.showValidationMessage("Por favor, preencha todos os campos.");
+                //     return false;
+                // }
 
-                    
-                  </form>
-                  
-                </div>`,
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Enviar",
-          showCloseButton: true,
-        
+
+                var objImg = {
+                        
+                        "categoria": categoria_img,
+                        "img": arquivo_img ,
+                        
+                        
+                };
+
+                console.table(objImg)
+
+                
+                // return { categoria_img: categoria_img, arquivo_img: arquivo_img };
+            }
         }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              
-              title: "Enviado com sucesso",
-              position: "center",
-              icon: "success",
-              showConfirmButton: false,
-              timer: 1200
-        
-            });
-          }
+            if (result.isConfirmed) {
+                
+            }
         });
+    });
+});
 
-
-      })
-
-      const dropArea = document.getElementById('drop-area');
-      const fileInput = document.getElementById('fileInput');
-      const preview = document.getElementById('preview');
-
-        dropArea.addEventListener('dragover', (event) => {
-          event.preventDefault();
-          dropArea.classList.add('active');
-        });
-
-        dropArea.addEventListener('dragleave', () => {
-          dropArea.classList.remove('active');
-        });
-
-        dropArea.addEventListener('drop', (event) => {
-          event.preventDefault();
-          dropArea.classList.remove('active');
-          const file = event.dataTransfer.files[0];
-          handleFile(file);
-        });
-
-        fileInput.addEventListener('change', (event) => {
-          const file = event.target.files[0];
-          handleFile(file);
-        });
-
-        function handleFile(file) {
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = function (event) {
-              preview.src = event.target.result;
-              preview.style.display = 'block';
-            };
-            reader.readAsDataURL(file);
-          }
-        }
-      
       
     </script>
 </body>
 </html>
 
 
-<!-- position: "center",
-icon: "success",
-title: "Adicionado com sucesso",
-showConfirmButton: false,
-timer: 1500 -->
