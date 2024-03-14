@@ -113,7 +113,7 @@
             title: "Adicionar Novo",
             html: `<div>
                         <form class="add-form" action="upload.php" method="post" enctype="multipart/form-data">
-                            <input class="texto" id="teste">
+
                             <div class="campo-container">
                                 <label for="categoria">Categoria</label>
                                 <select name="categoria" id="categoria" required>
@@ -159,11 +159,29 @@
                 console.table(objImg)
 
                 
-                // return { categoria_img: categoria_img, arquivo_img: arquivo_img };
+                return objImg;
             }
         }).then((result) => {
             if (result.isConfirmed) {
+
+                var dataNovaImg = result.value;
+
+                $.ajax({
+                    url: 'api.php',
+                    type: 'post',
+                    data: { dataCreateImg: JSON.stringify(dataNovaImg)},
+
+                    success: function (response) {
+                    
+
+                    
                 
+
+                    
+                    }
+
+              });
+
             }
         });
     });
