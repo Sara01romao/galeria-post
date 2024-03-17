@@ -2,17 +2,19 @@
 
 
 
-if(isset($_POST['dataCreateImg'])){
-    $img_obj = json_decode($_POST['dataCreateImg'], true);
-
-    $categoria = $img_obj['categoria'];
-    var_dump($img_obj);
+if(isset($_POST['categoria']) && isset($_FILES['imagem'])) {
+    $categoria = $_POST['categoria'];
+    $nome_arquivo = $_FILES['imagem']['name'];
+  
    
-    echo "criar ". $categoria;
+    echo "Categoria: " . $categoria . "<br>";
+    echo "Nome do arquivo: " . $nome_arquivo . "<br>";
+
+
+    
+
+   
 }
-
-
-
 
 
 

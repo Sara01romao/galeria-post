@@ -112,7 +112,7 @@
         Swal.fire({
             title: "Adicionar Novo",
             html: `<div>
-                        <form class="add-form" action="upload.php" method="post" enctype="multipart/form-data">
+                        <form class="add-form" enctype="multipart/form-data">
 
                             <div class="campo-container">
                                 <label for="categoria">Categoria</label>
@@ -133,54 +133,48 @@
             cancelButtonColor: "#d33",
             confirmButtonText: "Enviar",
             showCloseButton: true,
+
+            
             preConfirm: () => {
                
                 var categoria_img = $('#categoria').val();
-               
                 var arquivo_img = document.getElementById("fileInput").files[0];
 
+                console.log(categoria_img);
+                console.log(arquivo_img)
+
                
+                var formData = new FormData();
+                formData.append("categoria", categoria_img);
+                formData.append("imagem", arquivo_img);
+
+                console.log(formData.categoria)
 
                 
-                // if (categoria_img === "" || arquivo_img === undefined) {
-                //     Swal.showValidationMessage("Por favor, preencha todos os campos.");
-                //     return false;
-                // }
+                return formData;
 
-
-                var objImg = {
-                        
-                        "categoria": categoria_img,
-                        "img": arquivo_img ,
-                        
-                        
-                };
-
-                console.table(objImg)
 
                 
-                return objImg;
+               
             }
         }).then((result) => {
             if (result.isConfirmed) {
 
                 var dataNovaImg = result.value;
 
+                console.log("enviar", dataNovaImg)
+
                 $.ajax({
-                    url: 'api.php',
-                    type: 'post',
-                    data: { dataCreateImg: JSON.stringify(dataNovaImg)},
-
-                    success: function (response) {
+                url: 'api.php',
+                type: 'post',
+                data: dataNovaImg,
+                processData: false,
+                contentType: false,
+                success: function(response) {
                     
-
-                    
-                
-
-                    
-                    }
-
-              });
+                    console.log(response);
+                }
+            });
 
             }
         });
