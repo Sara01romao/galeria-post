@@ -3,6 +3,12 @@
 
 include("db_config.php");
 
+    $lista_sql= "SELECT * FROM `posts_galeria`";
+    $result_list= mysqli_query($con, $lista_sql);
+
+
+    
+
 ?>
 
 
@@ -74,10 +80,23 @@ include("db_config.php");
           </tr>
         </thead>
         <tbody>
+
+          <?php
+           
+            while($array= mysqli_fetch_array($result_list)){
+
+                $id= $array['id_post'];
+                $categoria= $array['categoria_post'];
+                $path_img= $array['path_post'];
+            
+          
+          
+          ?>
+
           <tr>
             <td>2</td>
-            <td><img src="../imgs/dia-mae1.png" width="80" height="80" alt=""></td>
-            <td>Dia das Mães</td>
+            <td><img src=".<?php echo $path_img ?>" width="80" height="80" alt=""></td>
+            <td><?php echo  $categoria ?></td>
             <td>
                 <button class="btn-excluir-img">
                     <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -88,6 +107,11 @@ include("db_config.php");
                 </button>
             </td>
           </tr>
+             
+          <?php } ?>
+
+
+
           <tr>
             <td>2</td>
             <td><img src="../imgs/dia-mae1.png" width="80" height="80" alt=""></td>
