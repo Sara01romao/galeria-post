@@ -1,6 +1,6 @@
 <?php
 
-
+include("db_config.php");
 
 if(isset($_POST['categoria']) && isset($_FILES['imagem'])) {
     $categoria = $_POST['categoria'];
@@ -25,6 +25,11 @@ if(isset($_POST['categoria']) && isset($_FILES['imagem'])) {
     $caminho_destino = "imgs/" . $nome_arquivo;
 
     if(move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_destino)) {
+      
+        $uploadImg_sql = "INSERT INTO `posts_galeria`  (`categoria_post`, `path_post`) VALUES ('$categoria', '$caminho_destino')";
+        $upload_result = mysqli_query($con,  $uploadImg_sql);
+
+        // echo $caminho_destino . " " . $categoria;
       
         echo "Arquivo enviado com sucesso.";
        
