@@ -6,6 +6,8 @@ if(isset($_POST['action']) ){
    
     $action = $_POST['action'];
 
+    echo $action;
+
     if( $action == "create"){
 
         if(isset($_POST['categoria']) && isset($_FILES['imagem'])) {
@@ -53,6 +55,14 @@ if(isset($_POST['action']) ){
 
 
        
+    }elseif ($action == "excluir"){
+        $id = $_POST['id'];
+
+        $delete_sql = "DELETE FROM `posts_galeria` WHERE id_post=$id";
+    
+        $result_remove = mysqli_query($con, $delete_sql);
+
+        echo "Imagem removida com sucesso";
     }
 
    
