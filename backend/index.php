@@ -106,7 +106,7 @@ include("db_config.php");
                       
                     Editar
                 </button>
-                <button class="btn-registro btn-excluir-img">
+                <button class="btn-registro btn-excluir-img" data-id="<?php echo $id;?>">
                     <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9.64286 0.687504H6.96429L6.75446 0.285746C6.71002 0.199854 6.64155 0.127604 6.55677 0.0771237C6.47198 0.0266431 6.37425 -6.50539e-05 6.27455 3.76679e-06H3.72321C3.62375 -0.000364272 3.52618 0.0262443 3.4417 0.0767811C3.35721 0.127318 3.28923 0.199738 3.24554 0.285746L3.03571 0.687504H0.357143C0.262423 0.687504 0.171582 0.72372 0.104605 0.788186C0.0376274 0.852651 0 0.940085 0 1.03125L0 1.71875C0 1.80992 0.0376274 1.89736 0.104605 1.96182C0.171582 2.02629 0.262423 2.0625 0.357143 2.0625H9.64286C9.73758 2.0625 9.82842 2.02629 9.8954 1.96182C9.96237 1.89736 10 1.80992 10 1.71875V1.03125C10 0.940085 9.96237 0.852651 9.8954 0.788186C9.82842 0.72372 9.73758 0.687504 9.64286 0.687504ZM1.1875 10.0332C1.20453 10.295 1.32459 10.5407 1.52323 10.7204C1.72186 10.9 1.98415 11 2.2567 11H7.7433C8.01585 11 8.27814 10.9 8.47677 10.7204C8.67541 10.5407 8.79547 10.295 8.8125 10.0332L9.28571 2.75H0.714286L1.1875 10.0332Z" fill="white"/>
                     </svg>
@@ -137,87 +137,141 @@ include("db_config.php");
     <script>
     $(document).ready(function () {
 
-    $('.btn-novo').on('click', function(){
-        Swal.fire({
-            title: "Adicionar Novo",
-            html: `<div>
-                        <form class="add-form" enctype="multipart/form-data">
+        $('.btn-novo').on('click', function(){
+            Swal.fire({
+                title: "Adicionar Novo",
+                html: `<div>
+                            <form class="add-form" enctype="multipart/form-data">
 
-                            <div class="campo-container">
-                                <label for="categoria">Categoria</label>
-                                <select name="categoria" id="categoria" required>
-                                    <option value="">Selecionar</option>
-                                    <option value="dia-das-maes">Dia das Mães</option>
-                                    <option value="pascoa">Páscoa</option>
-                                </select>
-                            </div>
-                            <div class="file-imagem-container" id="drop-area">
-                                <label for="arquivo-img">Enviar Imagem</label>
-                                <input type="file" id="fileInput" required >
-                            </div>
-                        </form>
-                    </div>`,
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Enviar",
-            showCloseButton: true,
-
-            
-            preConfirm: () => {
-               
-                var categoria_img = $('#categoria').val();
-                var arquivo_img = document.getElementById("fileInput").files[0];
-
-                console.log(categoria_img);
-                console.log(arquivo_img)
-
-               
-                var formData = new FormData();
-                formData.append("action", "create");
-                formData.append("categoria", categoria_img);
-                formData.append("imagem", arquivo_img);
-                
-
-                console.log(formData.categoria)
+                                <div class="campo-container">
+                                    <label for="categoria">Categoria</label>
+                                    <select name="categoria" id="categoria" required>
+                                        <option value="">Selecionar</option>
+                                        <option value="dia-das-maes">Dia das Mães</option>
+                                        <option value="pascoa">Páscoa</option>
+                                    </select>
+                                </div>
+                                <div class="file-imagem-container" id="drop-area">
+                                    <label for="arquivo-img">Enviar Imagem</label>
+                                    <input type="file" id="fileInput" required >
+                                </div>
+                            </form>
+                        </div>`,
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Enviar",
+                showCloseButton: true,
 
                 
-                return formData;
+                preConfirm: () => {
+                
+                    var categoria_img = $('#categoria').val();
+                    var arquivo_img = document.getElementById("fileInput").files[0];
 
+                    console.log(categoria_img);
+                    console.log(arquivo_img)
 
                 
-               
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
+                    var formData = new FormData();
+                    formData.append("action", "create");
+                    formData.append("categoria", categoria_img);
+                    formData.append("imagem", arquivo_img);
+                    
 
-                var dataNovaImg = result.value;
+                    console.log(formData.categoria)
 
-                console.log("enviar", dataNovaImg)
+                    
+                    return formData;
 
-                $.ajax({
-                url: 'api.php',
-                type: 'post',
-                data: dataNovaImg,
-                processData: false,
-                contentType: false,
-                success: function(response) {
 
-                    Swal.fire({
-                       
-                        icon: "success",
-                        title: "Imagem enviada com sucesso.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                                        
-                    console.log(response);
+                    
+                
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    var dataNovaImg = result.value;
+
+                    console.log("enviar", dataNovaImg)
+
+                    $.ajax({
+                    url: 'api.php',
+                    type: 'post',
+                    data: dataNovaImg,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+
+                        Swal.fire({
+                        
+                            icon: "success",
+                            title: "Imagem enviada com sucesso.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                                            
+                        console.log(response);
+                    }
+                });
+
                 }
             });
-
-            }
         });
-    });
+
+
+        $('table').on('click', 'button.btn-excluir-img', function() {
+            
+            var removerId = $(this).data('id');
+            console.log(removerId)
+
+
+            Swal.fire({
+              title: "Tem certeza de que deseja excluir?",
+              html:``,
+              confirmButtonText: "Remover",
+              showCancelButton: true,
+              cancelButtonText: "Cancelar",
+
+          }).then((result) => {
+           
+            if (result.isConfirmed) {
+
+                var dataAction = {
+                      "action": "excluir",
+                      "id": removerId,
+                        
+                        
+                };
+              
+              $.ajax({
+                url: 'api.php',
+                type: 'post',
+                data: dataAction,
+
+                success: function (response) {
+                  
+
+                  Swal.fire({
+                      position: "center",
+                      icon: "success",
+                      title: "Removido com sucesso",
+                      showConfirmButton: false,
+                      timer: 1500
+                  });
+
+                  $(`table button.btn-excluir-img[data-id="${removerId}"]`).closest('tr').remove();
+
+                }
+
+              });
+
+
+             
+            } 
+          });
+      });
+
 });
 
       
