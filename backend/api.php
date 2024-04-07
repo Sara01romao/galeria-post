@@ -6,7 +6,7 @@ if(isset($_POST['action']) ){
    
     $action = $_POST['action'];
 
-    echo $action;
+    // echo $action;
 
     if( $action == "create"){
 
@@ -63,6 +63,92 @@ if(isset($_POST['action']) ){
         $result_remove = mysqli_query($con, $delete_sql);
 
         echo "Imagem removida com sucesso";
+
+    }elseif ($action == "editarBusca"){
+        $id = $_POST['id'];
+
+        
+        $busca_sql= "SELECT * FROM `posts_galeria`  WHERE id_post=$id";
+        $result_busca= mysqli_query($con, $busca_sql);
+
+        $image = mysqli_fetch_assoc($result_busca);
+
+        echo json_encode($image);
+
+
+        
+        
+    }elseif ($action == "editar"){
+
+        if(isset($_FILES['imagem'])){
+
+      
+
+            if(isset($_POST['categoria']) && isset($_FILES['imagem'])) {
+                    $categoria = $_POST['categoria'];
+                    $id = $_POST['id'];
+                    
+                    
+                   
+
+                    $nome_arquivo = $_FILES['imagem']['name'];
+                    $tipo_arquivo = $_FILES['imagem']['type'];
+                    $tamanho_arquivo = $_FILES['imagem']['size'];
+
+                    if($tipo_arquivo != 'image/png' && $tipo_arquivo != 'image/jpeg') {
+                        echo "Tipo de arquivo inválido. Somente arquivos PNG e JPEG são permitidos.";
+                        exit; 
+                    }
+                    
+                
+                    $tamanho_maximo = 5 * 1024 * 1024; 
+
+                    if($tamanho_arquivo > $tamanho_maximo) {
+                        echo "O tamanho do arquivo excede o limite máximo permitido (5 MB).";
+                        exit; 
+                    }
+                
+                    $caminho_destino = "imgs/" . $nome_arquivo;
+
+                    
+
+                    if(move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_destino)) {
+                    
+                        // $editar_img = "UPDATE `posts_galeria` SET  `categoria_post`='$categoria', `path_post`='$caminho_destino',   WHERE `id_post` = $id";
+                        // $editar_result = mysqli_query($con,  $editar_img);
+                      
+                 
+                    
+                        echo "Arquivo alterado com sucesso.";
+                    
+                    } else {
+                        
+                        echo "Falha ao alterar";
+                    }
+                
+                
+            }
+
+        }else{
+
+            $categoria = $_POST['categoria'];
+            $id = $_POST['id'];
+
+            // echo $categoria. $id;
+
+            $editar_img = "UPDATE `posts_galeria` SET  `categoria_post`='$categoria' WHERE `id_post` = $id";
+            $editar_result = mysqli_query($con,  $editar_img);
+            
+            
+           
+           
+
+            echo "ok";
+
+
+
+        }
+        
     }
 
    

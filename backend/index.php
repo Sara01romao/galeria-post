@@ -98,7 +98,7 @@ include("db_config.php");
             <td><img src="./<?php echo $path_img ?>" width="80" height="80" alt=""></td>
             <td><?php echo  $categoria ?></td>
             <td>
-                <button class="btn-registro btn-editar-img">
+                <button class="btn-registro btn-editar-img" data-id="<?php echo $id;?>">
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.642 3.60625L11.4714 4.7768C11.3521 4.89614 11.1591 4.89614 11.0398 4.7768L8.22126 1.95833C8.10192 1.83899 8.10192 1.64601 8.22126 1.52667L9.39183 0.356118C9.86665 -0.118706 10.6386 -0.118706 11.1159 0.356118L12.642 1.88215C13.1193 2.35698 13.1193 3.12888 12.642 3.60625ZM7.21575 2.53218L0.547861 9.20002L0.00955506 12.2851C-0.0640812 12.7015 0.299022 13.0621 0.715447 12.991L3.80055 12.4502L10.4684 5.78231C10.5878 5.66297 10.5878 5.46999 10.4684 5.35065L7.64995 2.53218C7.52807 2.41284 7.33509 2.41284 7.21575 2.53218ZM3.15052 8.62871C3.01087 8.48906 3.01087 8.26561 3.15052 8.12596L7.06086 4.21565C7.20051 4.07599 7.42396 4.07599 7.56362 4.21565C7.70327 4.3553 7.70327 4.57875 7.56362 4.7184L3.65328 8.62871C3.51362 8.76837 3.29018 8.76837 3.15052 8.62871ZM2.23388 10.7641H3.45268V11.6859L1.81491 11.9728L1.02523 11.1831L1.31215 9.54535H2.23388V10.7641Z" fill="white"/>
                     </svg>
@@ -218,6 +218,106 @@ include("db_config.php");
                 }
             });
         });
+
+
+        $('table').on('click', 'button.btn-editar-img', function(){
+
+            var editarId = $(this).data('id');
+            console.log(editarId);
+
+            var dataAction  = {
+                "action": "editarBusca",
+                "id": editarId,
+            };
+
+            $.ajax({
+                url: 'api.php',
+                type: 'post',
+                data: dataAction,
+                success: function (response) {
+                    console.log(response);
+
+                    var imgData = JSON.parse(response);
+                    console.log(imgData.path_post);
+
+                    Swal.fire({
+                        title: "Editar Imagem",
+                        html: `<div>
+                                    <form class="add-form" enctype="multipart/form-data">
+                                        <div class="campo-container">
+                                            <label for="categoria">Categoria</label>
+                                            <select name="categoria" id="categoria-editar" required>
+                                                <option value="">Selecionar</option>
+                                                <option value="dia-das-maes">Dia das Mães</option>
+                                                <option value="pascoa">Páscoa</option>
+                                            </select>
+                                        </div>
+                                        <div class="file-imagem-container" id="drop-area">
+                                            <label for="arquivo-img">Alterar Imagem</label>
+                                            <div>
+                                                <img src="${imgData.path_post}" width="80" height="80" alt="">
+                                                <input type="file" id="fileInputEditar" required >
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>`,
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Enviar",
+                        showCloseButton: true,
+
+                        preConfirm: () => {
+                            var categoria_img = $('#categoria-editar').val();
+                            var arquivo_img = document.getElementById("fileInputEditar").files[0];
+
+                           
+
+                            var formData = new FormData();
+                            formData.append("id", editarId);
+                            formData.append("action", "editar");
+                            formData.append("categoria", categoria_img);
+                            formData.append("imagem", arquivo_img);
+
+                            
+
+                            return formData;
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+
+                            var dataEditImg = result.value;
+
+                            console.log("enviar", dataEditImg)
+
+                            $.ajax({
+                                url: 'api.php',
+                                type: 'post',
+                                data: dataEditImg,
+                                processData: false,
+                                contentType: false,
+                                success: function(response) {
+                                    
+                                    console.log(response);
+                                }
+                            });
+
+                           
+                        }
+                    });
+
+
+                    $("#categoria-editar option").each(function() {
+                       
+                        if ($(this).val() === imgData.categoria_post) {
+                           
+                            $(this).prop("selected", true);
+                        }
+                    });
+                }
+            });
+        });
+
 
 
         $('table').on('click', 'button.btn-excluir-img', function() {
