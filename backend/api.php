@@ -114,10 +114,10 @@ if(isset($_POST['action']) ){
 
                     if(move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_destino)) {
                     
-                        // $editar_img = "UPDATE `posts_galeria` SET  `categoria_post`='$categoria', `path_post`='$caminho_destino',   WHERE `id_post` = $id";
-                        // $editar_result = mysqli_query($con,  $editar_img);
+                        $editar_img = "UPDATE `posts_galeria` SET  `categoria_post`='$categoria', `path_post`='$caminho_destino' WHERE `id_post` = $id";
+                        $editar_result = mysqli_query($con,  $editar_img);
                       
-                 
+                       
                     
                         echo "Arquivo alterado com sucesso.";
                     
