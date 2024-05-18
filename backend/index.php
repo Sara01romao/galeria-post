@@ -193,7 +193,6 @@ include("db_config.php");
 
                     var dataNovaImg = result.value;
 
-                    console.log("enviar", dataNovaImg)
 
                     $.ajax({
                     url: 'api.php',
@@ -203,6 +202,12 @@ include("db_config.php");
                     contentType: false,
                     success: function(response) {
 
+                        var novoRegistro = JSON.parse(response)
+
+                        console.log(teste, "teste")
+
+                        // var clienteResponse = JSON.parse(response);
+
                         Swal.fire({
                         
                             icon: "success",
@@ -210,8 +215,13 @@ include("db_config.php");
                             showConfirmButton: false,
                             timer: 1500
                         });
+
+
+                        
+                        
+
                                             
-                        console.log(response);
+                        // console.log(response);
                     }
                 });
 
@@ -326,6 +336,13 @@ include("db_config.php");
             console.log(removerId)
 
 
+            var pathImg = $(`table button.btn-excluir-img[data-id="${removerId}"]`).closest('tr').find('img').attr('src');
+            console.log(pathImg);
+
+           
+
+           
+
             Swal.fire({
               title: "Tem certeza de que deseja excluir?",
               html:``,
@@ -340,6 +357,7 @@ include("db_config.php");
                 var dataAction = {
                       "action": "excluir",
                       "id": removerId,
+                      "pathImg": pathImg
                         
                         
                 };

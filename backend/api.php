@@ -37,9 +37,19 @@ if(isset($_POST['action']) ){
                     $uploadImg_sql = "INSERT INTO `posts_galeria`  (`categoria_post`, `path_post`) VALUES ('$categoria', '$caminho_destino')";
                     $upload_result = mysqli_query($con,  $uploadImg_sql);
 
+                    if($upload_result){
+                        $id = mysqli_insert_id($con);
+
+                        $response = ['id' => $id, 'pathImg' => $caminho_destino, 'categoria' => $categoria ];
+                        
+                        echo json_encode($response );
+                       
+                    }
+                    
                     // echo $caminho_destino . " " . $categoria;
                 
-                    echo "Arquivo enviado com sucesso.";
+                    // echo "Arquivo enviado com sucesso.";
+
                 
                 } else {
                     
@@ -57,12 +67,22 @@ if(isset($_POST['action']) ){
        
     }elseif ($action == "excluir"){
         $id = $_POST['id'];
+        $pathImagem = $_POST['pathImg'];
 
-        $delete_sql = "DELETE FROM `posts_galeria` WHERE id_post=$id";
+        if($id  && $pathImagem ){
+            if (unlink($pathImagem)) {
+
+                 $delete_sql = "DELETE FROM `posts_galeria` WHERE id_post=$id";
     
-        $result_remove = mysqli_query($con, $delete_sql);
+                 $result_remove = mysqli_query($con, $delete_sql);
 
-        echo "Imagem removida com sucesso";
+                echo "Imagem excluída com sucesso!";
+              } else {
+                echo "Falha ao excluir imagem.";
+              }
+
+        }
+
 
     }elseif ($action == "editarBusca"){
         $id = $_POST['id'];
