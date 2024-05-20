@@ -147,8 +147,11 @@ if(isset($_POST['action']) ){
                             $editar_result = mysqli_query($con,  $editar_img);
                         
                         
+                            $response = ['id' => $id, 'pathNovo' => $caminho_destino, 'categoria' => $categoria ];
                         
-                            echo "Arquivo alterado com sucesso.";
+                            echo json_encode($response );
+                        
+                            // echo "Arquivo alterado com sucesso.";
                         }
 
                       
@@ -177,10 +180,12 @@ if(isset($_POST['action']) ){
             $editar_result = mysqli_query($con,  $editar_img);
             
             
-           
+            $response = ['categoria' => $categoria ];
+                        
+            echo json_encode($response );
            
 
-            echo "ok";
+           
 
 
 

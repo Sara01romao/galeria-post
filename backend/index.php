@@ -94,9 +94,9 @@ include("db_config.php");
           ?>
 
           <tr>
-            <td><?php echo $id ?></td>
-            <td><img src="./<?php echo $path_img ?>" width="80" height="80" alt=""></td>
-            <td><?php echo  $categoria ?></td>
+            <td class="id-coluna"><?php echo $id ?></td>
+            <td class="img-coluna"><img src="./<?php echo $path_img ?>" width="80" height="80" alt=""></td>
+            <td class="categoria-coluna"><?php echo  $categoria ?></td>
             <td>
                 <button class="btn-registro btn-editar-img" data-id="<?php echo $id;?>">
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -221,7 +221,7 @@ include("db_config.php");
                         <tr>
                             <td>${novoRegistro.id}</td>
                             <td><img src="./${novoRegistro.pathImg}" width="80" height="80" alt=""></td>
-                            <td>${novoRegistro.categoria}</td>
+                            <td class="categoria-coluna">${novoRegistro.categoria}</td>
                             <td>
                                 <button class="btn-registro btn-editar-img" data-id="${novoRegistro.id}">
                                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -312,7 +312,7 @@ include("db_config.php");
                             var arquivo_img = document.getElementById("fileInputEditar").files[0];
 
                             var pathImg = $(`table button.btn-editar-img[data-id="${editarId}"]`).closest('tr').find('img').attr('src');
-                             console.log("path" ,pathImg);
+                           
 
                             var formData = new FormData();
                             formData.append("id", editarId);
@@ -321,7 +321,7 @@ include("db_config.php");
                             formData.append("categoria", categoria_img);
                             formData.append("imagem", arquivo_img);
 
-
+                            console.log("form", formData)
                             
 
                            
@@ -333,7 +333,7 @@ include("db_config.php");
 
                             var dataEditImg = result.value;
 
-                            console.log("enviar", dataEditImg)
+                            console.log("enviar", dataEditImg.id)
 
                             $.ajax({
                                 url: 'api.php',
@@ -344,6 +344,57 @@ include("db_config.php");
                                 success: function(response) {
                                     
                                     console.log(response);
+
+                                    var editarRegistro = JSON.parse(response)
+                                    
+                                    if(editarRegistro.pathNovo){
+                                       var atualizadoRegistro = `
+                                        <tr>
+                                            <td>${editarRegistro.id}</td>
+                                            <td><img src="./${editarRegistro.pathNovo}" width="80" height="80" alt=""></td>
+                                            <td>${editarRegistro.categoria}</td>
+                                            <td>
+                                                <button class="btn-registro btn-editar-img" data-id="${editarRegistro.id}">
+                                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M12.642 3.60625L11.4714 4.7768C11.3521 4.89614 11.1591 4.89614 11.0398 4.7768L8.22126 1.95833C8.10192 1.83899 8.10192 1.64601 8.22126 1.52667L9.39183 0.356118C9.86665 -0.118706 10.6386 -0.118706 11.1159 0.356118L12.642 1.88215C13.1193 2.35698 13.1193 3.12888 12.642 3.60625ZM7.21575 2.53218L0.547861 9.20002L0.00955506 12.2851C-0.0640812 12.7015 0.299022 13.0621 0.715447 12.991L3.80055 12.4502L10.4684 5.78231C10.5878 5.66297 10.5878 5.46999 10.4684 5.35065L7.64995 2.53218C7.52807 2.41284 7.33509 2.41284 7.21575 2.53218ZM3.15052 8.62871C3.01087 8.48906 3.01087 8.26561 3.15052 8.12596L7.06086 4.21565C7.20051 4.07599 7.42396 4.07599 7.56362 4.21565C7.70327 4.3553 7.70327 4.57875 7.56362 4.7184L3.65328 8.62871C3.51362 8.76837 3.29018 8.76837 3.15052 8.62871ZM2.23388 10.7641H3.45268V11.6859L1.81491 11.9728L1.02523 11.1831L1.31215 9.54535H2.23388V10.7641Z" fill="white"/>
+                                                    </svg>
+
+                                                    
+                                                    Editar
+                                                </button>
+                                                <button class="btn-registro btn-excluir-img" data-id="${editarRegistro.id}">
+                                                    <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M9.64286 0.687504H6.96429L6.75446 0.285746C6.71002 0.199854 6.64155 0.127604 6.55677 0.0771237C6.47198 0.0266431 6.37425 -6.50539e-05 6.27455 3.76679e-06H3.72321C3.62375 -0.000364272 3.52618 0.0262443 3.4417 0.0767811C3.35721 0.127318 3.28923 0.199738 3.24554 0.285746L3.03571 0.687504H0.357143C0.262423 0.687504 0.171582 0.72372 0.104605 0.788186C0.0376274 0.852651 0 0.940085 0 1.03125L0 1.71875C0 1.80992 0.0376274 1.89736 0.104605 1.96182C0.171582 2.02629 0.262423 2.0625 0.357143 2.0625H9.64286C9.73758 2.0625 9.82842 2.02629 9.8954 1.96182C9.96237 1.89736 10 1.80992 10 1.71875V1.03125C10 0.940085 9.96237 0.852651 9.8954 0.788186C9.82842 0.72372 9.73758 0.687504 9.64286 0.687504ZM1.1875 10.0332C1.20453 10.295 1.32459 10.5407 1.52323 10.7204C1.72186 10.9 1.98415 11 2.2567 11H7.7433C8.01585 11 8.27814 10.9 8.47677 10.7204C8.67541 10.5407 8.79547 10.295 8.8125 10.0332L9.28571 2.75H0.714286L1.1875 10.0332Z" fill="white"/>
+                                                    </svg>
+                                                    
+                                                    Excluir
+                                                </button>
+                                            </td>
+                                            
+                                        </tr>
+                                     `;
+
+                                     $(`table button.btn-editar-img[data-id="${editarId}"]`).closest('tr').replaceWith(atualizadoRegistro)
+
+                                    }else{
+
+                                        var atualizadoRegistro = `
+                                        
+                                            <td class="categoria-coluna">${editarRegistro.categoria}</td>
+                                            `;
+                                            
+                                        $(`table button.btn-editar-img[data-id="${editarId}"]`).closest('tr').find('.categoria-coluna').replaceWith(atualizadoRegistro);
+                                       
+                                    }
+
+                                    
+                                       
+
+
+                                        
+
+
+
                                 }
                             });
 
