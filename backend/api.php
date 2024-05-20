@@ -69,6 +69,8 @@ if(isset($_POST['action']) ){
         $id = $_POST['id'];
         $pathImagem = $_POST['pathImg'];
 
+        
+
         if($id  && $pathImagem ){
             if (unlink($pathImagem)) {
 
@@ -80,6 +82,7 @@ if(isset($_POST['action']) ){
               } else {
                 echo "Falha ao excluir imagem.";
               }
+        
 
         }
 
@@ -107,8 +110,10 @@ if(isset($_POST['action']) ){
             if(isset($_POST['categoria']) && isset($_FILES['imagem'])) {
                     $categoria = $_POST['categoria'];
                     $id = $_POST['id'];
+                    $pathImagem = $_POST['pathImg'];
                     
                     
+                 
                    
 
                     $nome_arquivo = $_FILES['imagem']['name'];
@@ -134,12 +139,23 @@ if(isset($_POST['action']) ){
 
                     if(move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_destino)) {
                     
-                        $editar_img = "UPDATE `posts_galeria` SET  `categoria_post`='$categoria', `path_post`='$caminho_destino' WHERE `id_post` = $id";
-                        $editar_result = mysqli_query($con,  $editar_img);
+                        
+                        if (unlink($pathImagem)) {
+                        
+
+                            $editar_img = "UPDATE `posts_galeria` SET  `categoria_post`='$categoria', `path_post`='$caminho_destino' WHERE `id_post` = $id";
+                            $editar_result = mysqli_query($con,  $editar_img);
+                        
+                        
+                        
+                            echo "Arquivo alterado com sucesso.";
+                        }
+
                       
-                       
-                    
-                        echo "Arquivo alterado com sucesso.";
+
+
+
+                        
                     
                     } else {
                         
@@ -153,6 +169,7 @@ if(isset($_POST['action']) ){
 
             $categoria = $_POST['categoria'];
             $id = $_POST['id'];
+           
 
             // echo $categoria. $id;
 

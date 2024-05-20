@@ -261,6 +261,10 @@ include("db_config.php");
             var editarId = $(this).data('id');
             console.log(editarId);
 
+           
+
+            
+
             var dataAction  = {
                 "action": "editarBusca",
                 "id": editarId,
@@ -307,15 +311,20 @@ include("db_config.php");
                             var categoria_img = $('#categoria-editar').val();
                             var arquivo_img = document.getElementById("fileInputEditar").files[0];
 
-                           
+                            var pathImg = $(`table button.btn-editar-img[data-id="${editarId}"]`).closest('tr').find('img').attr('src');
+                             console.log("path" ,pathImg);
 
                             var formData = new FormData();
                             formData.append("id", editarId);
                             formData.append("action", "editar");
+                            formData.append("pathImg", pathImg); 
                             formData.append("categoria", categoria_img);
                             formData.append("imagem", arquivo_img);
 
+
                             
+
+                           
 
                             return formData;
                         }
