@@ -45,17 +45,8 @@ include("db_config.php");
    </header>
      
 
-   <div class="filtro-container-categoria">
-
-       <div class="filtro-categoria">
-          <label for="">Filtrar Categoria</label>
-           <select name="" id="">
-              <option value="">Selecionar</option>
-              <option value="dia-das-maes">Dia das Mães</option>
-              <option value="pascoa">Páscoa</option>
-              <option value="festa-junina">Festa Junina</option>
-           </select>
-       </div>
+   <div  class="add-option">
+    
 
        <button class="btn-novo">
             <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,6 +60,7 @@ include("db_config.php");
    </div>
 
    <div class="table-container">
+
     <table>
        
         <thead>
@@ -220,7 +212,7 @@ include("db_config.php");
                         var novoRegistro = `
                         <tr>
                             <td>${novoRegistro.id}</td>
-                            <td><img src="./${novoRegistro.pathImg}" width="80" height="80" alt=""></td>
+                            <td class="img-coluna"><img src="./${novoRegistro.pathImg}" width="80" height="80" alt=""></td>
                             <td class="categoria-coluna">${novoRegistro.categoria}</td>
                             <td>
                                 <button class="btn-registro btn-editar-img" data-id="${novoRegistro.id}">
@@ -244,7 +236,7 @@ include("db_config.php");
                         `;
 
 
-                        $("table").append(novoRegistro);
+                        $("table tbody").append(novoRegistro);
 
                                             
                         // console.log(response);

@@ -6,8 +6,6 @@ if(isset($_POST['action']) ){
    
     $action = $_POST['action'];
 
-    // echo $action;
-
     if( $action == "create"){
 
         if(isset($_POST['categoria']) && isset($_FILES['imagem'])) {
@@ -46,10 +44,6 @@ if(isset($_POST['action']) ){
                        
                     }
                     
-                    // echo $caminho_destino . " " . $categoria;
-                
-                    // echo "Arquivo enviado com sucesso.";
-
                 
                 } else {
                     
@@ -151,14 +145,8 @@ if(isset($_POST['action']) ){
                         
                             echo json_encode($response );
                         
-                            // echo "Arquivo alterado com sucesso.";
                         }
 
-                      
-
-
-
-                        
                     
                     } else {
                         
@@ -174,20 +162,16 @@ if(isset($_POST['action']) ){
             $id = $_POST['id'];
            
 
-            // echo $categoria. $id;
+    
 
             $editar_img = "UPDATE `posts_galeria` SET  `categoria_post`='$categoria' WHERE `id_post` = $id";
             $editar_result = mysqli_query($con,  $editar_img);
             
             
-            $response = ['categoria' => $categoria ];
+            $response = ['id' => $id, 'categoria' => $categoria ];
                         
             echo json_encode($response );
            
-
-           
-
-
 
         }
         
