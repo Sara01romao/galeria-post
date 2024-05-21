@@ -239,7 +239,7 @@ include("db_config.php");
                         $("table tbody").append(novoRegistro);
 
                                             
-                        // console.log(response);
+                        
                     }
                 });
 
@@ -377,11 +377,19 @@ include("db_config.php");
                                             
                                         $(`table button.btn-editar-img[data-id="${editarId}"]`).closest('tr').find('.categoria-coluna').replaceWith(atualizadoRegistro);
                                        
+                                   
+                                   
                                     }
 
                                     
                                        
-
+                                    Swal.fire({
+                        
+                                        icon: "success",
+                                        title: "Alteração feita com sucesso.",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
 
                                         
 
