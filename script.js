@@ -43,13 +43,13 @@ $(document).on('click', '.baixarImg', function() {
 
     var link = $('<a>', {
         href: urlimg,
-        download: 'imagem.jpg' // Nome do arquivo a ser baixado
+        download: 'imagem.jpg' 
     });
 
     $('body').append(link);
     link[0].click();
 
-    // Remove o link após o download
+   
     link.remove();
 });
 
