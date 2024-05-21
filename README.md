@@ -27,4 +27,12 @@ Javascript
 
 ```
 
+## :rocket: Tecnologias Usadas
+Back-end 
+```
+PHP
+
+
+```
+
 
