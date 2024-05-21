@@ -1,9 +1,7 @@
 
   
 
-![open-img](https://github.com/Sara01romao/galeria-post/assets/46323667/f8bbdc79-fd06-4cb3-af16-97900f2dbc91)
-
-
+![postfacil](https://github.com/Sara01romao/galeria-post/assets/46323667/2cf63768-002f-41b0-a20f-f0acd0c4de5c)
 
 
 <br>
